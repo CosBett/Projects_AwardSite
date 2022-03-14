@@ -4,8 +4,9 @@ from django.contrib.auth import login, authenticate
 from .models import Profile, Post, Rating
 import random
 from django.contrib.auth.decorators import login_required
-from .serializer import Profile_Serializer
+from .serializer import Profile_Serializer, Post_Serializer
 from rest_framework import viewsets
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -32,6 +33,12 @@ def index(request):
 class Profile_viewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = Profile_Serializer
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = Post_Serializer
+
+
 
 
 def signup(request):
