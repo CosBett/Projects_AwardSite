@@ -4,7 +4,8 @@ from django.contrib.auth import login, authenticate
 from .models import Profile, Post, Rating
 import random
 from django.contrib.auth.decorators import login_required
-
+from .serializer import Profile_Serializer
+from rest_framework import viewsets
 
 
 # Create your views here.
@@ -27,6 +28,11 @@ def index(request):
         posts = None    
     homepage = {'posts':posts, 'form':form,'random_posts':random_posts}
     return render(request, 'index.html', homepage)
+
+class Profile_viewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = Profile_Serializer
+
 
 def signup(request):
     if request.method == 'POST':
