@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'awardApp',
     'crispy_forms',
     "pyuploadcare.dj",
+    'rest_framework',
 
 
 ]
@@ -128,6 +129,14 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'index'
 
 LOGOUT_REDIRECT_URL = 'index'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+}
+
 
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
