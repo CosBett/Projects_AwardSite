@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .forms import PostForm, SignupForms
 from django.contrib.auth import login, authenticate
 from .models import Profile, Post, Rating
@@ -34,16 +34,13 @@ class Profile_viewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = Profile_Serializer
 
-class PostViewSet(viewsets.ModelViewSet):
+class Post_viewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = Post_Serializer
 
-class UserViewSet(viewsets.ModelViewSet):
+class User_viewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = User_Serializer
-
-
-
 
 
 def signup(request):
@@ -66,4 +63,13 @@ def signup(request):
 @login_required(login_url='login')
 def profile(request, username):
     return render(request, 'profile.html')
+
+def user_profile(request, username):
+    userProfile = get_object_or_404(User, username=username)
+    if request.user == userProfile:
+        return redirect('profile', username=request.user.username)
+        
+    UserProfile_context = {'userProfile': userProfile }
+    return render(request, 'userprofile.html', UserProfile_context)
+
 
