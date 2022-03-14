@@ -3,6 +3,8 @@ from .forms import PostForm, SignupForms
 from django.contrib.auth import login, authenticate
 from .models import Profile, Post, Rating
 import random
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -42,4 +44,8 @@ def signup(request):
     signup_context = {'form':form}
     
     return render(request, 'registration /signup.html', signup_context)
+
+@login_required(login_url='login')
+def profile(request, username):
+    return render(request, 'profile.html')
 
