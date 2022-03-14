@@ -17,7 +17,7 @@ class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email')
-        
+
 class UpdateUserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
@@ -31,3 +31,7 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('photo', 'title', 'url', 'description', 'technologies',)
 
+class RatingsForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ['design', 'usability', 'content']
