@@ -2,8 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from django.forms import ImageField
-
+from pyuploadcare.dj.models import ImageField
 import datetime as dt
 
 
@@ -38,8 +37,7 @@ class Post(models.Model):
     technologies = models.CharField(max_length=200, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     date = models.DateTimeField(auto_now_add=True, blank=True)
-    photo = ImageField(manual_crop='1280x720')
-
+    photo =ImageField(blank=True, manual_crop="1280x720")
 
     def __str__(self):
         return f'{self.title}'

@@ -29,7 +29,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'awardApp',
     'crispy_forms',
+    "pyuploadcare.dj",
+
+
 ]
+UPLOADCARE = {
+    'pub_key': 'UPLOADCARE_KEY',
+    'secret': 'UPLOADCARE_SECRET',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
