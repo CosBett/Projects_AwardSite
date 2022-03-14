@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.forms import ImageField
 
 
 
@@ -26,3 +27,30 @@ class Profile(models.Model):
     @receiver(post_save,sender=user)
     def save_profile(sender, instance, **kwargs):
         instance.profile.save() 
+
+class Post(models.Model):
+    title = models.CharField(max_length=150)
+    url = models.URLField(max_length=300)
+    description = models.TextField(max_length=500)
+    technologies = models.CharField(max_length=200, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    date = models.DateTimeField(auto_now_add=True, blank=True)
+    photo = ImageField(manual_crop='1280x720')
+
+
+    def __str__(self):
+        return f'{self.title}'
+
+    def save_post(self):
+        self.save()    
+
+    def delete_post(self):
+        self.delete()
+
+    @classmethod
+    def search_project(cls, title):
+        return cls.objects.filter(title__icontains=title).all()
+
+    @classmethod
+    def all_posts(cls):
+        return cls.objects.all()

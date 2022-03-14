@@ -43,3 +43,8 @@ class TestPost(TestCase):
         self.post.delete_post()
         post = Post.search_project('test')
         self.assertTrue(len(post) < 1)
+
+
+
+
+   
