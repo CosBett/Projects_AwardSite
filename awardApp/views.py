@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from .models import Profile, Post, Rating
 import random
 from django.contrib.auth.decorators import login_required
-from .serializer import Profile_Serializer, Post_Serializer
+from .serializer import Profile_Serializer, Post_Serializer, User_Serializer
 from rest_framework import viewsets
 from django.contrib.auth.models import User
 
@@ -37,6 +37,11 @@ class Profile_viewSet(viewsets.ModelViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = Post_Serializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = User_Serializer
+
 
 
 
