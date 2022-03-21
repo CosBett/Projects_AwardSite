@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import PostForm, SignupForms
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate,logout
 from .models import Profile, Post, Rating
 import random
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,8 @@ from .serializer import Profile_Serializer, Post_Serializer, User_Serializer
 from rest_framework import viewsets,permissions
 
 from django.contrib.auth.models import User
+from django.contrib import messages
+
 
 
 # Create your views here.
@@ -48,7 +50,19 @@ class User_viewSet(viewsets.ModelViewSet):
     
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-
+def log_in(request):
+    if request.method =='POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('homepage')
+        else:
+            messages.success(request, ("There Was An Error Logging In, Try Again..."))	
+            return redirect('login')
+    else:
+		    return render(request, 'registration/login.html', {})
 def signup(request):
     if request.method == 'POST':
         form = SignupForms(request.POST)
@@ -78,4 +92,7 @@ def user_profile(request, username):
     UserProfile_context = {'userProfile': userProfile }
     return render(request, 'userprofile.html', UserProfile_context)
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 

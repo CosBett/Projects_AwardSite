@@ -1,0 +1,28 @@
+{% extends 'registration/regis_base.html' %} {% load crispy_forms_tags %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="card mt-4 p-3 shadow-lg rounded ">
+        <div class=" card-body ">
+          <h5 class="card-title "><a>Sign in to continue</a> <span style="float:right ">Don't have an account? <a  href="{% url 'signup' %} " class="text-info ">Register now</a></span></h5>
+          <form action="" method=POST>
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password">
+            </div>
+            <button type="submit " value="Submit" class="btn btn-outline-info btn-md ">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 "></div>
+</div>
+</div>
+{% endblock %}
