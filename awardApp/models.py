@@ -4,6 +4,8 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from pyuploadcare.dj.models import ImageField
 import datetime as dt
+from urllib.parse import urlparse
+
 
 
 
@@ -19,7 +21,7 @@ class Profile(models.Model):
     contact = models.EmailField(max_length=100, blank=True)
 
     def __str__(self):
-        return f'{self.user.username} Profile'
+        return self.user.username
 
     @receiver(post_save,sender=user)
     def create_profile(sender, instance, created, **kwargs):
@@ -39,8 +41,9 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now_add=True, blank=True)
     photo =ImageField(blank=True, manual_crop="1280x720")
 
+
     def __str__(self):
-        return f'{self.title}'
+        return self.title
 
     def save_post(self):
         self.save()    
@@ -55,6 +58,10 @@ class Post(models.Model):
     @classmethod
     def all_posts(cls):
         return cls.objects.all()
+
+    def url_text(self):
+        parsed_url = urlparse(self.website_link)
+        return parsed_url.hostname.replace("www.","")+"/..."    
 
 class Rating(models.Model):
     rating = (

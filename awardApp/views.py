@@ -5,7 +5,8 @@ from .models import Profile, Post, Rating
 import random
 from django.contrib.auth.decorators import login_required
 from .serializer import Profile_Serializer, Post_Serializer, User_Serializer
-from rest_framework import viewsets
+from rest_framework import viewsets,permissions
+
 from django.contrib.auth.models import User
 
 
@@ -19,11 +20,10 @@ def index(request):
             post.save()
     else:
         form = PostForm()
-
     try:
-        post = Post.objects.all()
-        posts =posts[::-1]
-        displayed_post = random.ranint(0,len(posts)-1)
+        posts = Post.objects.all()
+        posts = posts[::-1]
+        displayed_post = random.randint(0,len(posts)-1)
         random_posts = posts[displayed_post]
     except Post.DoesNotExist:
         posts = None    
@@ -34,13 +34,19 @@ class Profile_viewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = Profile_Serializer
 
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
 class Post_viewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = Post_Serializer
 
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
 class User_viewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = User_Serializer
+    
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 def signup(request):
@@ -58,7 +64,7 @@ def signup(request):
 
     signup_context = {'form':form}
     
-    return render(request, 'registration /signup.html', signup_context)
+    return render(request, 'registration/signup.html', signup_context)
 
 @login_required(login_url='login')
 def profile(request, username):
