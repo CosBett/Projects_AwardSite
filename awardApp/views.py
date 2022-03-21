@@ -57,9 +57,10 @@ def log_in(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, "Logged in Sucessfully!")	
             return redirect('homepage')
         else:
-            messages.success(request, ("There Was An Error Logging In, Try Again..."))	
+            messages.success(request, "There Was An Error Logging In, Try Again...")	
             return redirect('login')
     else:
 		    return render(request, 'registration/login.html', {})
@@ -94,5 +95,7 @@ def user_profile(request, username):
 
 def logout_view(request):
     logout(request)
+    messages.success(request, "Logged out Sucessfully!")	
+
     return redirect('login')
 
