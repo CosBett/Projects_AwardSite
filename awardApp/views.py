@@ -1,5 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import PostForm, SignupForms
+from .forms import PostForm, SignupForms,RatingsForm
 from django.contrib.auth import login, authenticate,logout
 from .models import Profile, Post, Rating
 import random
@@ -92,6 +93,49 @@ def user_profile(request, username):
         
     UserProfile_context = {'userProfile': userProfile }
     return render(request, 'userprofile.html', UserProfile_context)
+
+@login_required(login_url='login')
+def project_rating(request, post):
+    post = Post.objects.get(title=post)
+    ratings = Rating.objects.filter(user=request.user, post=post).first()
+    rating_status = None
+    if ratings is None:
+        rating_status = False
+    else:
+        rating_status = True
+    if request.method == 'POST':
+        form = RatingsForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = request.user
+            rate.post = post
+            rate.save()
+            post_ratings = Rating.objects.filter(post=post)
+
+            design_ratings = [d.design for d in post_ratings]
+            design_average = sum(design_ratings) / len(design_ratings)
+
+            usability_ratings = [us.usability for us in post_ratings]
+            usability_average = sum(usability_ratings) / len(usability_ratings)
+
+            content_ratings = [content.content for content in post_ratings]
+            content_average = sum(content_ratings) / len(content_ratings)
+
+            score = (design_average + usability_average + content_average) / 3
+            print(score)
+            rate.design_average = round(design_average, 2)
+            rate.usability_average = round(usability_average, 2)
+            rate.content_average = round(content_average, 2)
+            rate.score = round(score, 2)
+            rate.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = RatingsForm()
+    project_context = {'post': post,'rating_form': form,'rating_status': rating_status
+    }
+    return render(request, 'project_rating.html', project_context)
+
+
 
 def logout_view(request):
     logout(request)
