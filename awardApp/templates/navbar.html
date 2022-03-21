@@ -1,15 +1,14 @@
-<nav class="navbar navbar-expand-lg " id="navbar">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'homepage' %}"> Projects Award Site</a>
-    <button type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span ><i class="fa fa-bars  fa-lg white-text mr-md-5 mr-3 fa-2x d-lg-none"></i></span>
+<nav class="navbar fixed-top navbar-expand-lg " id="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'homepage' %}"><span id="proj">Projects</span> <span id="awardS">AwardSite</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="color: white;">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}">Home</a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item active">
+          <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}"><i class="bi bi-house-fill" style="font-size:1.5rem;color: white;"></i></a> </li>
+        <li class="nav-item p-2">
           <form class="d-flex" role="search" action="">
             <input class="form-control me-2 rounded-pill" type="text" placeholder="Search Project" aria-label="Search" name="searchImg">
             <button class="btn btn-outline-success rounded-pill" type="submit">Search</button>
@@ -17,22 +16,35 @@
         </li>
       </ul>
       <ul class="navbar-nav navbar-right">
+        {% if user.is_authenticated%}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Profile </a>
+          <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user.username|title }} <img class="rounded-circle nav-img" alt=""></a>
           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item text-center">Profile</a>
+            <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
             <hr>
-            <a class="dropdown-item text-center"> Edit profile</a>
+            <a class="dropdown-item text-center" href=""> Edit profile</a>
             <hr>
-            <a class="text-secondary text-center dropdown-item ">Log Out</a>
+            <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
           </div>
         </li>
-        <a href="{% url 'signup' %} " class="login btn btn-outline-info ml-1"> Create Account</a>
-        <a href="{% url 'login' %} " class="login btn  btn-outline-info ml-1 "> Login</a>
-        <a href="{% url 'logout' %} " class="login btn  btn-outline-info ml-1 "> Log out</a>
-
-        <button class="btn btn-outline-info  btn-sm " data-toggle="modal " data-target=".bd-example-modal-xl ">  submit project </button>
+        {% else %}
+        <a href="{% url 'signup' %}" class="sign btn rounded-pill btn-outline-light"> Create Account</a>
+        <a href="{% url 'login' %}" class="sign rounded-pill btn  btn-outline-light"> Login</a> {% endif %}
+        <button class="btn btn-sm rounded-pill sign btn-outline-light " id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
+            Submit Site
+        </button>
       </ul>
     </div>
   </div>
 </nav>
+<!-- <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div> -->
