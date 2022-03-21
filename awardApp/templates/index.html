@@ -8,11 +8,11 @@
           <span class="trend_day">{{random_posts.date|date}}</span>
         </div>
         <div class="align-self-center posted_by">
-          by <strong><a href=" ">{{ random_posts.user.username }}</a>
-          </strong> from <strong>{{ random_posts.user.profile.location }}</strong>
+          By <strong><a href=" ">{{ random_posts.user.username }}</a>
+          </strong> , <strong>{{ random_posts.user.profile.location }}</strong>
         </div>
       </div>
-      <div class="col-md-8 text-center " style=" background: url( '{{random_posts.photo.cdn_url }}');height: 50vh;" id="dashboard ">
+      <div class="col-md-8 text-center img-fluid" style=" background: url( '{{random_posts.photo.cdn_url }}');height: 50vh;" id="dashboard ">
         <div class="box-site-head ">
           <div class=" box-bg ">
             <a href="{% url 'project' random_posts.title %} ">
@@ -77,7 +77,8 @@
     </div>
   </div>
   <div class="container " id="projects_list ">
-    <h2 class="mt-4 ">Project Websites available for Rating</h2>
+    <h2 class="mt-4 text-center">Project Websites available for Rating</h2>
+
     {% if user.is_authenticated %}
     <div class="modal fade bd-example-modal-xl " id="ModalCenter " tabindex="-1 " role="dialog " aria-labelledby="exampleModalCenterTitle " aria-hidden="true ">
       <div class="modal-dialog modal-dialog-centered " role="document ">
@@ -85,8 +86,8 @@
           <div class="modal-header ">
             <h5 class="modal-title " id="exampleModalLongTitle ">Upload a project</h5>
             <button type="button " class="close " data-dismiss="modal " aria-label="Close ">
-                            <span aria-hidden="true ">&times;</span>
-                        </button>
+            <span aria-hidden="true ">&times;</span>
+           </button>
           </div>
           <div class="modal-body ">
             <form action=" " method="post " enctype="multipart/form-data ">
@@ -102,28 +103,36 @@
     {% endif %}
     <div class="row ">
       {% if posts %}
-
       <div class="templates display ">
-        {% for post in posts %}
-        <div class="col-md-4 mb-4 ">
-          <div class="card ">
-            <div class="view overlay ">
-              <img class="card-img-top " src="{{ post.photo.cdn_url }} " alt="{{photo.title}} ">
-              <a href="{% url 'project' post.title %} ">
+        <div class="row">
+          {% for post in posts %}
+          <div class="col-md-4 mb-4 ">
+            <div class="card  shadow-lg rounded">
+              <div class="view overlay ">
+                <h4 class="card-title text-center"><a href="{% url 'project' post.title %} ">{{post.title|title}}</a>
+                </h4>
                 <div class="mask rgba-white-slight "></div>
-              </a>
-            </div>
-            <div class="card-body ">
-              <h4 class="card-title "><a href="{% url 'project' post.title %} ">{{post.title|title}}</a> <a class="btn btn-sm btn-outline-info " href="{{ post.url }} "> View</a></h4>
-              <hr>
-              <p class="card-text "><img id="prof_picture " src="{{post.user.profile.profile_picture.url}} " alt=" "> By {{post.user.username|title}} <span style="float:right ">{{post.date|date}}</span>
-              </p>
+                </a>
+              </div>
+              <div class="card-body ">
+                <img class="card-img" src="{{ post.photo.cdn_url }} " alt="{{photo.title}} ">
+                <div>
+                  <hr>
+                  <p style="font-size: x-small;">
+                    <strong>Description:</strong>{{post.description}}</p>
+                  <hr>
+                  <p class="card-text ">
+                    <img id="prof_picture" src="{{post.user.profile.profile_picture.url}} " alt=" "> By {{post.user.username|title}} <span style="float:right ">{{post.date|date}}</span>
+                  </p>
+                  <hr>
+                  <p class="text-center"><a class="btn btn-sm btn-outline-success " href="{{ post.url }} ">Visit live Site</a></p>
+                </div>
+              </div>
             </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
-
       {% endif %}
     </div>
   </div>
