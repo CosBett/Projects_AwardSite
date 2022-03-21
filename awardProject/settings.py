@@ -1,6 +1,8 @@
 
 from pathlib import Path
 import os
+import dj_database_url
+from decouple import config,Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'SECRET_KEY'
+SECRET_KEY =config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,8 +37,8 @@ INSTALLED_APPS = [
 
 ]
 UPLOADCARE = {
-    'pub_key': 'UPLOADCARE_KEY',
-    'secret': 'UPLOADCARE_SECRET',
+    'pub_key': config('UPLOADCARE_KEY'),
+    'secret': config('UPLOADCARE_SECRET'),
 }
 
 MIDDLEWARE = [
@@ -76,12 +78,13 @@ WSGI_APPLICATION = 'awardProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'awards',
-        'USER': 'mandela',
-    'PASSWORD':'password.',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+    'PASSWORD':config('DB_PASSWORD'),
     }
 }
-
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
