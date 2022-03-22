@@ -153,6 +153,17 @@ def edit_profile(request, username):
     }
     return render(request, 'edit_profile.html', editProfile_context)
 
+def search_project(request):
+    if request.method == 'GET':
+        title = request.GET.get("title")
+        results = Post.objects.filter(title__icontains=title).all()
+        message = f'name'
+        search_context= { 'results': results, 'message': message
+        }
+        return render(request, 'search.html', search_context)
+    else:
+        message = "You haven't searched for any project"
+    return render(request, 'search.html', {'message': message})
 
 
 def logout_view(request):
