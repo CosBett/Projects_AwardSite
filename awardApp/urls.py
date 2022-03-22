@@ -16,9 +16,11 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('profile/<username>/', views.profile, name='profile'),
+    path('profile/<username>/info', views.user_profile, name='profile'),
     path('project/<post>', views.project_rating, name='project'),
-    path('profile/<username>/edit', views.edit_profile, name='edit_profile'),
+    path('profile/<username>/edit', views.edit_profile, name='editprofile'),
+    path('project/<post>', views.project_rating, name='project'),
+
 
 
 ]

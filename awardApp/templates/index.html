@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-2  p-3 ">
         <div class=" align-self-center p-3 tred ">
-          <h5 id="trend">Trending Site</h5>
+          <h5 id="trend">Site of the Day</h5>
           <span class="trend_day">{{random_posts.date|date}}</span>
         </div>
         <div class="align-self-center posted_by">
@@ -12,58 +12,45 @@
           </strong> , <strong>{{ random_posts.user.profile.location }}</strong>
         </div>
       </div>
-      <div class="col-md-8 text-center img-fluid" style=" background: url( '{{random_posts.photo.cdn_url }}');height:50vh;" id="dashboard ">
+      <div class="col-md-8 text-center img-fluid" style=" background: url( '{{random_posts.photo.cdn_url }}');height:55vh;" id="dashboard ">
         <div class="box-site-head ">
-          <div class=" box-bg ">
+          <div class="  ">
             <a href="{% url 'project' random_posts.title %} ">
             </a>
           </div>
-          <div class="box-content over ">
-            <a href="{% url 'project' random_posts.title %} " class="site-link " aria-label=" "></a>
+          <div class="site_link">
+            <a href="{% url 'project' random_posts.title %} " aria-label=" "></a>
             <div class="content-div ">
               <div class="box-info ">
-                <div class="row mx-auto D-block ">
-                  <h2 class="heading-large ">
+                <div class="row display">
+                  <h2 class="">
                     <a href="{% url 'project' random_posts.title %}" class="btn post_title">{{ random_posts.title }}</a>
                   </h2>
                 </div>
-                <div class="box-notesite js-notes ">
-                  <ul>
+                <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4  "></div>
+                  <div class="row container d-flex justify-content-center ">
                     {% for rating in random_posts.ratings.all %} {% if forloop.counter is random_posts.ratings.all.count %}
-                    <li class="circle-note-progress style-design " data-note=" ">
-                      <div class="circle ">
-                        <div class="rating ">
-                          <p class="d-block mx-auto textrate ">{{rating.design_average}}</p>
-                        </div>
-                      </div>
-                      <div class="legend ">DESIGN</div>
-                    </li>
-                    <li class="circle-note-progress style-usability " data-note="{{rating.usability_average}} ">
-                      <div class="circle ">
-                        <div class="rating1 ">
-                          <p class="d-block mx-auto textrate ">{{rating.usability_average}}</p>
-                        </div>
-                      </div>
-                      <div class="legend ">USABILITY</div>
-                    </li>
-                    <li class="circle-note-progress style-creativity " data-note="{{rating.content_average}} ">
-                      <div class="circle ">
-                        <div class="rating2 ">
-                          <p class="d-block mx-auto textrate ">{{rating.content_average}}</p>
-                        </div>
-                      </div>
-                      <div class="legend ">CONTENT</div>
-                    </li>
-                    <li class="circle-note-progress style-content " data-note="{{ rating.score }} ">
-                      <div class="circle ">
-                        <div class="rating3 ">
-                          <p class="d-block mx-auto textrate ">{{rating.score}}</p>
-                        </div>
-                      </div>
-                      <div class="legend ">SCORE</div>
-                    </li>
+                    <div class=" col-md-3  ">
+                      <p class="attrib rating">{{rating.design_average}}</p>
+                      <p class="attrib ">DESIGN</p>
+                    </div>
+                    <div class=" col-md-3 ">
+                      <p class="d-block rating1  ">{{rating.usability_average}}</p>
+                      <p class="attrib  ">USABILITY</p>
+                    </div>
+                    <div class="col-md-3 ">
+                      <p class="d-block rating2">{{rating.content_average}}</p>
+                      <p class="attrib  ">CONTENT</p>
+                    </div>
+                    <div class="col-md-3 ">
+                      <p class="d-block  rating3 ">{{rating.score}}</p>
+                      <p class="attrib  ">SCORE</p>
+                    </div>
                     {% endif %} {% endfor %}
-                  </ul>
+                  </div>
+                  <div class="col-md-4"></div>
                 </div>
               </div>
             </div>
@@ -76,7 +63,7 @@
       </div>
     </div>
   </div>
-  <div class="container " id="projects_list ">
+  <div class="container " id="projects_list">
     <hr style="font-weight:300; color: #78bc61;padding-top:1% ;">
     <h2 class="mt-4 text-center">Project sites available for Rating</h2>
 
@@ -103,12 +90,11 @@
       <div class="templates display ">
         <div class="row">
           {% for post in posts %}
-          <div class="col-md-4 mb-4 ">
+          <div class="col-md-4 mb-3 ">
             <div class="card  shadow-lg rounded p-2">
               <div class="view overlay ">
                 <h4 class="card-title text-center"><a class="btn P_title" href="{% url 'project' post.title %} ">{{post.title|title}}</a>
                 </h4>
-                <div class="mask rgba-white-slight "></div>
                 </a>
               </div>
               <div class="card-body ">
@@ -119,13 +105,15 @@
                     <strong>Description:</strong>{{post.description}}</p>
                   <p style="font-size: xx-small;">
                     <strong>Technologies Used:</strong>{{post.technologies}}</p>
-
                   <hr>
                   <p class="card-text ">
                     <img id="prof_picture" src="{{post.user.profile.profile_picture.url}} " alt=" "> By {{post.user.username|title}} <span style="float:right ">{{post.date|date}}</span>
                   </p>
                   <hr>
-                  <p class="text-center"><a class="btn btn-sm btn-outline-success " href="{{ post.url }} ">Visit live Site</a></p>
+                  <div class="d-flex justify-content-between">
+                    <p class="text-center"><a class="btn btn-sm btn-outline-success " href="{{ post.url }} ">Visit live Site</a></p>
+                    <p class="text-center"><a class="btn btn-sm btn-outline-info " href="{% url 'project' post.title %} ">Rate Site</a></p>
+                  </div>
                 </div>
               </div>
             </div>

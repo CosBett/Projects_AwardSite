@@ -84,12 +84,12 @@ def signup(request):
 
 @login_required(login_url='login')
 def profile(request, username):
-    return render(request, 'profile.html')
+    return render(request, 'profileInfo.html',{})
 
 def user_profile(request, username):
     userProfile = get_object_or_404(User, username=username)
     if request.user == userProfile:
-        return redirect('profile', username=request.user.username)
+        return redirect('profileInfo.html', username=request.user.username)
         
     UserProfile_context = {'userProfile': userProfile }
     return render(request, 'userprofile.html', UserProfile_context)
@@ -138,6 +138,7 @@ def project_rating(request, post):
 @login_required(login_url='login')
 def edit_profile(request, username):
     user = User.objects.get(username=username)
+    profile =Profile.objects.get(user=user)
     if request.method == 'POST':
         userform = UpdateUserForm(request.POST, instance=request.user)
         profileform = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
@@ -148,7 +149,7 @@ def edit_profile(request, username):
     else:
         userform = UpdateUserForm(instance=request.user)
         profileform = UpdateUserProfileForm(instance=request.user.profile)
-    editProfile_context = {'userform': userform,'profileform': profileform
+    editProfile_context = {'userform': userform,'profileform': profileform,'profile':profile,
     }
     return render(request, 'edit_profile.html', editProfile_context)
 

@@ -19,11 +19,11 @@
         {% if user.is_authenticated%}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ user.username|title }} <img class="rounded-circle nav-img" alt=""></a>
+            {{ user.username|title }} <img class="rounded-circle nav-img" style="height:10%;width:10%;" src="{{post.user.profile.profile_picture.url}} " alt=""></a>
           <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item text-center" href="{% url 'profile' user.username %}">Profile</a>
             <hr>
-            <a class="dropdown-item text-center" href=""> Edit profile</a>
+            <a class="dropdown-item text-center" href="{% url 'editprofile' user.username %}"> Edit profile</a>
             <hr>
             <a href="{% url 'logout' %}" class="text-secondary text-center dropdown-item">Log Out</a>
           </div>

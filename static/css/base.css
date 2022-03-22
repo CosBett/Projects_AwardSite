@@ -1,64 +1,99 @@
-       #projects_list {
-         background-color: #141204;
-       }
-       
-       #proj {
-         color: #78bc61;
-         font-family: 'Abril Fatface', cursive;
-         font-size: xx-large;
-       }
-       
-       #awardS {
-         color: #FF6B6B;
-         font-family: 'Abril Fatface', cursive;
-         font-size: x-large;
-       }
-       
-       nav {
-         background-color: #141204;
-       }
-       
-       .sign {
-         color: #EFF1F3;
-       }
-       
-       #prof_picture {
-         width: 5vw;
-         height: 10vh;
-         object-fit: cover;
-         border-radius: 50%
-       }
-       
-       #site_photo {
-         width: 100%;
-         height: 50%;
-       }
-       
-       #dashboard {
-         /* width: 100%;
-         background-image: url(../images/goldstage.png);
-         background-repeat: no-repeat;
-         border-radius: 2%; */
-       }
-       
-       .content-div {
-         background-color: rgba(255, 255, 255, 0.459);
-       }
-       
-       #trend {
-         color: #78bc61;
-       }
-       
-       .posted_by {
-         margin-bottom: -2%;
-       }
-       
-       .post_title {
-         font-size: xx-large;
-         color: #FF6B6B;
-       }
-       
-       .P_title {
-         font-size: large;
-         color: #78bc61;
-       }
+  body {
+    background-color: #EFF1F3;
+  }
+  
+  #proj {
+    color: #78bc61;
+    font-family: 'Abril Fatface', cursive;
+    font-size: xx-large;
+  }
+  
+  #awardS {
+    color: #FF6B6B;
+    font-family: 'Abril Fatface', cursive;
+    font-size: x-large;
+  }
+  
+  nav {
+    background-color: #141204;
+  }
+  
+  .sign {
+    color: #EFF1F3;
+  }
+  
+  #prof_picture {
+    width: 5vw;
+    height: 10vh;
+    object-fit: cover;
+    border-radius: 50%
+  }
+  
+  #site_photo {
+    width: 100%;
+    height: 50%;
+  }
+  
+  .content-div {
+    background-color: rgba(10, 7, 7, 0.671);
+    border-radius: 20%;
+    margin-top: 12%;
+    padding-bottom: 3%;
+  }
+  
+  #trend {
+    color: #78bc61;
+  }
+  
+  .posted_by {
+    margin-bottom: -2%;
+  }
+  
+  .post_title {
+    font-size: xx-large;
+    color: #FF6B6B;
+  }
+  
+  .P_title {
+    font-size: large;
+    color: #78bc61;
+  }
+  
+  .attrib {
+    font-weight: 400;
+    color: #EFF1F3;
+  }
+  
+  .rating,
+  .rating1,
+  .rating2,
+  .rating3 {
+    color: white;
+    border-radius: 50%;
+    width: 40%;
+    height: 70%;
+    padding-top: 5%;
+    margin-left: 28%;
+  }
+  
+  .rating {
+    border: 4px solid rgb(247, 168, 22);
+  }
+  
+  .rating1 {
+    border: 4px solid #FF6B6B;
+  }
+  
+  .rating2 {
+    border: 4px solid rgb(18, 18, 240);
+  }
+  
+  .rating3 {
+    border: 4px solid #78bc61;
+  }
+  
+  .site-link {
+    padding-top: -20px !important;
+    padding-left: -5px !important;
+    padding-right: -5px !important;
+  }
