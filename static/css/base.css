@@ -35,10 +35,10 @@
        }
        
        #dashboard {
-         width: 100%;
+         /* width: 100%;
          background-image: url(../images/goldstage.png);
          background-repeat: no-repeat;
-         border-radius: 2%;
+         border-radius: 2%; */
        }
        
        .content-div {
@@ -55,4 +55,10 @@
        
        .post_title {
          font-size: xx-large;
+         color: #FF6B6B;
+       }
+       
+       .P_title {
+         font-size: large;
+         color: #78bc61;
        }

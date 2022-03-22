@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect,get_object_or_404
-from .forms import PostForm, SignupForms,RatingsForm
+from .forms import PostForm, SignupForms,RatingsForm,UpdateUserForm,UpdateUserProfileForm
 from django.contrib.auth import login, authenticate,logout
 from .models import Profile, Post, Rating
 import random
@@ -134,6 +134,23 @@ def project_rating(request, post):
     project_context = {'post': post,'rating_form': form,'rating_status': rating_status
     }
     return render(request, 'project_rating.html', project_context)
+
+@login_required(login_url='login')
+def edit_profile(request, username):
+    user = User.objects.get(username=username)
+    if request.method == 'POST':
+        userform = UpdateUserForm(request.POST, instance=request.user)
+        profileform = UpdateUserProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        if userform.is_valid() and profileform.is_valid():
+            userform.save()
+            profileform.save()
+            return redirect('profile', user.username)
+    else:
+        userform = UpdateUserForm(instance=request.user)
+        profileform = UpdateUserProfileForm(instance=request.user.profile)
+    editProfile_context = {'userform': userform,'profileform': profileform
+    }
+    return render(request, 'edit_profile.html', editProfile_context)
 
 
 

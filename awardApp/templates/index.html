@@ -12,7 +12,7 @@
           </strong> , <strong>{{ random_posts.user.profile.location }}</strong>
         </div>
       </div>
-      <div class="col-md-8 text-center img-fluid" style=" background: url( '{{random_posts.photo.cdn_url }}');height: 50vh;" id="dashboard ">
+      <div class="col-md-8 text-center img-fluid" style=" background: url( '{{random_posts.photo.cdn_url }}');height:50vh;" id="dashboard ">
         <div class="box-site-head ">
           <div class=" box-bg ">
             <a href="{% url 'project' random_posts.title %} ">
@@ -77,24 +77,21 @@
     </div>
   </div>
   <div class="container " id="projects_list ">
-    <h2 class="mt-4 text-center">Project Websites available for Rating</h2>
+    <hr style="font-weight:300; color: #78bc61;padding-top:1% ;">
+    <h2 class="mt-4 text-center">Project sites available for Rating</h2>
 
     {% if user.is_authenticated %}
-    <div class="modal fade bd-example-modal-xl " id="ModalCenter " tabindex="-1 " role="dialog " aria-labelledby="exampleModalCenterTitle " aria-hidden="true ">
-      <div class="modal-dialog modal-dialog-centered " role="document ">
-        <div class="modal-content ">
-          <div class="modal-header ">
+    <div class="modal fade text-center" id="submitsite" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
             <h5 class="modal-title " id="exampleModalLongTitle ">Upload a project</h5>
-            <button type="button " class="close " data-dismiss="modal " aria-label="Close ">
-            <span aria-hidden="true ">&times;</span>
-           </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body ">
-            <form action=" " method="post " enctype="multipart/form-data ">
-              {% csrf_token %} {{ form|crispy }}
-              <input type="submit " class="btn btn-sm btn-info " value="Save " />
-              <button type="button " class="btn btn-outline-danger btn-sm " data-dismiss="modal ">Close
-                            </button>
+          <div class="modal-body">
+            <form action=" " method="post "> {% csrf_token %} {{ form|crispy }}
+              <button type="submit" class="btn btn-outline-primary btn-sm"> Submit Site</button>
+              <button type="button " class="btn btn-outline-danger btn-sm " data-dismiss="modal ">Close </button>
             </form>
           </div>
         </div>
@@ -107,9 +104,9 @@
         <div class="row">
           {% for post in posts %}
           <div class="col-md-4 mb-4 ">
-            <div class="card  shadow-lg rounded">
+            <div class="card  shadow-lg rounded p-2">
               <div class="view overlay ">
-                <h4 class="card-title text-center"><a href="{% url 'project' post.title %} ">{{post.title|title}}</a>
+                <h4 class="card-title text-center"><a class="btn P_title" href="{% url 'project' post.title %} ">{{post.title|title}}</a>
                 </h4>
                 <div class="mask rgba-white-slight "></div>
                 </a>
@@ -120,6 +117,9 @@
                   <hr>
                   <p style="font-size: x-small;">
                     <strong>Description:</strong>{{post.description}}</p>
+                  <p style="font-size: xx-small;">
+                    <strong>Technologies Used:</strong>{{post.technologies}}</p>
+
                   <hr>
                   <p class="card-text ">
                     <img id="prof_picture" src="{{post.user.profile.profile_picture.url}} " alt=" "> By {{post.user.username|title}} <span style="float:right ">{{post.date|date}}</span>
