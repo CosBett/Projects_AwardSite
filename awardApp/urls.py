@@ -20,6 +20,7 @@ urlpatterns = [
     path('project/<post>', views.project_rating, name='project'),
     path('profile/<username>/edit', views.edit_profile, name='editprofile'),
     path('project/<post>', views.project_rating, name='project'),
+    path('search/', views.search_project, name='search'),
 
 
 

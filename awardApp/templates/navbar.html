@@ -9,7 +9,7 @@
         <li class="nav-item active">
           <a class="nav-link active" aria-current="page" href="{% url 'homepage' %}"><i class="bi bi-house-fill" style="font-size:1.5rem;color: white;"></i></a> </li>
         <li class="nav-item p-2">
-          <form class="d-flex" role="search" action="">
+          <form class="d-flex" role="search" method="get" action="{% url 'search' %}">
             <input class="form-control me-2 rounded-pill" type="text" placeholder="Search Project" aria-label="Search" name="searchImg">
             <button class="btn btn-outline-success rounded-pill" type="submit">Search</button>
           </form>
