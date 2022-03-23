@@ -21,6 +21,11 @@ This is a django web application which allows a user to post a project he/she ha
 ### Edit Profile page 
 ![Homepage](/static/images/project.png)
 
+### Posts API page 
+![Homepage](/static/images/Postapi.png)
+
+### Profiles API page 
+![Homepage](/static/images/profileapi.png)
 
 ### How to Clone this application,
  1. Open the terminal
