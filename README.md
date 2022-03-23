@@ -19,7 +19,7 @@ This is a django web application which allows a user to post a project he/she ha
 ![Homepage](/static/images/project.png)
 
 ### Edit Profile page 
-![Homepage](/static/images/project.png)
+![Homepage](/static/images/profile.png)
 
 ### Posts API page 
 ![Homepage](/static/images/Postapi.png)
@@ -74,6 +74,7 @@ The application has no known bugs at the moment.
 4. HTML and jinja templating.
 5. Markdown for Readme file
 6. Heroku for deployment
+7. Django-Rest API framework
 
 ## Support and contact details
 
